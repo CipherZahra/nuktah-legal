@@ -4,11 +4,11 @@
 
 ## سياسة الخصوصية / Privacy Policy / Politique de confidentialité
 
-https://ciphertzahra.github.io/nuktah-legal/privacy
+https://cipherzahra.github.io/nuktah-legal/privacy
 
 ## شروط الاستخدام / Terms of Use / Conditions d'utilisation
 
-https://ciphertzahra.github.io/nuktah-legal/terms
+https://cipherzahra.github.io/nuktah-legal/terms
 
 ---
 
