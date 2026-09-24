@@ -12,5 +12,5 @@ https://ciphertzahra.github.io/nuktah-legal/terms
 
 ---
 
-**المصدر:** [`privacy.md`](privacy.md) · [`terms.md`](terms.md)
+**المصدر / Source:** [`index.html`](index.html) · [`privacy.html`](privacy.html) · [`terms.html`](terms.html) · [`styles.css`](styles.css) · [`legal.js`](legal.js)
 **التواصل / Contact:** [noonnuktah@gmail.com](mailto:noonnuktah@gmail.com)
