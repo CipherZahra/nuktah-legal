@@ -69,17 +69,8 @@ body {
   width: 28px;
   height: 28px;
   border-radius: 8px;
-  background: var(--accent);
-  position: relative;
+  object-fit: contain;
   flex: none;
-}
-
-.brand .logo::after {
-  content: '';
-  position: absolute;
-  inset: 8px;
-  border-radius: 50%;
-  background: #fff;
 }
 
 .brand small {
