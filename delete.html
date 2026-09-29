@@ -1,0 +1,429 @@
+<!doctype html>
+<html lang="ar" dir="ltr">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Nuktah — حذف الحساب · Delete account</title>
+    <meta
+      name="description"
+      content="Permanently delete your Nuktah account — احذف حسابك في نقطة نهائياً."
+    />
+    <meta name="robots" content="noindex" />
+    <link rel="icon" href="logo.png" />
+    <link rel="stylesheet" href="styles.css" />
+    <script>document.documentElement.className += ' js';</script>
+    <script defer src="legal.js"></script>
+  </head>
+  <body>
+    <header class="site-header">
+      <a class="brand" href="./"><img class="logo" src="logo.png" alt="Nuktah" width="28" height="28" /> Nuktah <small>· Legal</small></a>
+      <nav class="lang-switch" aria-label="Language">
+        <button type="button" class="lang-btn" data-set-lang="ar">العربية</button>
+        <button type="button" class="lang-btn" data-set-lang="en">English</button>
+        <button type="button" class="lang-btn" data-set-lang="fr">Français</button>
+      </nav>
+    </header>
+
+    <main>
+      <article class="lang" data-lang="ar" dir="rtl">
+        <h1>حذف الحساب</h1>
+        <p class="lead">سيؤدي هذا إلى حذف حسابك نهائياً من خوادمنا — لا يمكن التراجع عن هذا الإجراء.</p>
+        <ul>
+          <li>تُحذف الفصول والدرجات والتقارير والرصيد وسجل الفوترة نهائياً من خوادمنا.</li>
+          <li>تُمسح جميع البيانات المحلية من جهازك عند الخروج.</li>
+          <li>لتأكيد أنك صاحب الحساب، نرسل رابط تحقق إلى بريدك الإلكتروني.</li>
+        </ul>
+        <p>لا تملك وصولاً إلى البريد؟ راسلنا على <a href="mailto:noonnuktah@gmail.com">noonnuktah@gmail.com</a>.</p>
+      </article>
+
+      <article class="lang" data-lang="en" dir="ltr">
+        <h1>Delete account</h1>
+        <p class="lead">
+          This permanently deletes your account from our servers — it cannot be undone.
+        </p>
+        <ul>
+          <li>Classes, grades, reports, credits, and billing history are permanently removed.</li>
+          <li>All local data on this device is cleared when you are signed out.</li>
+          <li>To confirm you own the account, we send a verification link to your email.</li>
+        </ul>
+        <p>
+          No access to that mailbox? Email
+          <a href="mailto:noonnuktah@gmail.com">noonnuktah@gmail.com</a>.
+        </p>
+      </article>
+
+      <article class="lang" data-lang="fr" dir="ltr">
+        <h1>Supprimer le compte</h1>
+        <p class="lead">
+          Cette action supprime définitivement votre compte de nos serveurs — elle est
+          irréversible.
+        </p>
+        <ul>
+          <li>
+            Classes, notes, rapports, crédits et historique de facturation sont définitivement
+            supprimés.
+          </li>
+          <li>Toutes les données locales de cet appareil sont effacées à la déconnexion.</li>
+          <li>
+            Pour confirmer que vous êtes propriétaire du compte, nous envoyons un lien de
+            vérification à votre e-mail.
+          </li>
+        </ul>
+        <p>
+          Pas d’accès à cette boîte ? Écrivez à
+          <a href="mailto:noonnuktah@gmail.com">noonnuktah@gmail.com</a>.
+        </p>
+      </article>
+
+      <section class="wizard" aria-live="polite">
+        <div class="wstep" data-step="1">
+          <label class="wlabel" for="email" data-i18n="emailLabel"></label>
+          <input
+            class="winput"
+            id="email"
+            type="email"
+            autocomplete="email"
+            placeholder="you@example.com"
+            data-i18n-placeholder="emailPlaceholder"
+          />
+          <div class="tw" id="tw"></div>
+          <p class="werror" data-error hidden></p>
+          <button class="wbtn wbtn-primary" type="button" data-action="send" data-i18n="sendBtn"></button>
+        </div>
+
+        <div class="wstep" data-step="2" hidden>
+          <p data-i18n="sentMsg"></p>
+          <label class="wlabel" for="code" data-i18n="codeLabel"></label>
+          <div class="wcode-row">
+            <input
+              class="winput"
+              id="code"
+              type="text"
+              inputmode="numeric"
+              autocomplete="one-time-code"
+              maxlength="6"
+              data-i18n-placeholder="codePlaceholder"
+            />
+            <button class="wbtn wbtn-primary" type="button" data-action="verify" data-i18n="verifyBtn"></button>
+          </div>
+          <p class="werror" data-error hidden></p>
+          <button class="wbtn" type="button" data-action="resend" data-i18n="resendBtn"></button>
+          <button class="wbtn wbtn-ghost" type="button" data-action="back" data-i18n="backBtn"></button>
+        </div>
+
+        <div class="wstep" data-step="3" hidden>
+          <p data-i18n="confirmMsg"></p>
+          <p class="werror" data-error hidden></p>
+          <button class="wbtn wbtn-danger" type="button" data-action="delete" data-i18n="deleteBtn"></button>
+          <button class="wbtn wbtn-ghost" type="button" data-action="cancel" data-i18n="cancelBtn"></button>
+        </div>
+
+        <div class="wstep" data-step="4" hidden>
+          <p class="wsuccess" data-i18n="successMsg"></p>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">© 2026 CipherZahra · Nuktah (نقطة)</footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
+    <script>
+      (function () {
+        var SUPABASE_URL = 'https://qyugsyzfcygfmfeyyrjd.supabase.co';
+        var SUPABASE_KEY = 'sb_publishable_-GEvV2hciG57OSqbBKel5g_zq3M5BbA';
+        var TURNSTILE_SITEKEY = '0x4AAAAAAFCsl8lNhObCk4Qw';
+        var REDIRECT_TO = location.origin + location.pathname;
+
+        var client = null;
+        function api() {
+          if (!client) client = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+          return client;
+        }
+
+        var STR = {
+          ar: {
+            emailLabel: 'البريد الإلكتروني للحساب',
+            emailPlaceholder: 'you@example.com',
+            sendBtn: 'أرسل رابط التحقق',
+            sendingBtn: 'جارٍ الإرسال…',
+            sentMsg: 'أرسلنا رابطاً إلى {email} — افتحه في هذا المتصفح، ثم عد إلى هنا لإتمام الحذف.',
+            codeLabel: 'أو أدخل الرسالة التي وصلتك:',
+            codePlaceholder: '······',
+            verifyBtn: 'تحقق وتابع',
+            verifyingBtn: 'جارٍ التحقق…',
+            resendBtn: 'إعادة إرسال الرابط',
+            backBtn: 'رجوع',
+            confirmMsg: 'أنت على وشك حذف حساب {email} نهائياً. لا يمكن التراجع عن هذا الإجراء.',
+            deleteBtn: 'احذف حسابي نهائياً',
+            deletingBtn: 'جارٍ الحذف…',
+            cancelBtn: 'إلغاء',
+            successMsg: '✓ تم حذف حسابك نهائياً.',
+            errEmail: 'أدخل بريداً إلكترونياً صالحاً.',
+            errCaptcha: 'أكمل التحقق أولاً.',
+            errSend: 'تعذر إرسال الرابط. حاول مرة أخرى.',
+            errVerify: 'تعذر التحقق. تأكد من الرابط أو الرمز.',
+            errDelete: 'تعذر حذف الحساب. حاول مرة أخرى.',
+          },
+          en: {
+            emailLabel: 'Account email',
+            emailPlaceholder: 'you@example.com',
+            sendBtn: 'Send verification link',
+            sendingBtn: 'Sending…',
+            sentMsg:
+              'We sent a link to {email} — open it in this browser, then come back here to finish.',
+            codeLabel: 'Or enter the code from the email:',
+            codePlaceholder: '······',
+            verifyBtn: 'Verify and continue',
+            verifyingBtn: 'Verifying…',
+            resendBtn: 'Resend link',
+            backBtn: 'Back',
+            confirmMsg: 'You are about to permanently delete {email}. This cannot be undone.',
+            deleteBtn: 'Permanently delete my account',
+            deletingBtn: 'Deleting…',
+            cancelBtn: 'Cancel',
+            successMsg: '✓ Your account has been permanently deleted.',
+            errEmail: 'Enter a valid email address.',
+            errCaptcha: 'Complete the verification first.',
+            errSend: 'Could not send the link. Try again.',
+            errVerify: 'Verification failed. Check the link or code.',
+            errDelete: 'Could not delete the account. Try again.',
+          },
+          fr: {
+            emailLabel: 'E-mail du compte',
+            emailPlaceholder: 'you@example.com',
+            sendBtn: 'Envoyer le lien de vérification',
+            sendingBtn: 'Envoi…',
+            sentMsg:
+              'Nous avons envoyé un lien à {email} — ouvrez-le dans ce navigateur, puis revenez ici pour terminer.',
+            codeLabel: 'Ou saisissez le code reçu :',
+            codePlaceholder: '······',
+            verifyBtn: 'Vérifier et continuer',
+            verifyingBtn: 'Vérification…',
+            resendBtn: 'Renvoyer le lien',
+            backBtn: 'Retour',
+            confirmMsg:
+              'Vous êtes sur le point de supprimer définitivement {email}. Cette action est irréversible.',
+            deleteBtn: 'Supprimer définitivement mon compte',
+            deletingBtn: 'Suppression…',
+            cancelBtn: 'Annuler',
+            successMsg: '✓ Votre compte a été définitivement supprimé.',
+            errEmail: 'Saisissez une adresse e-mail valide.',
+            errCaptcha: 'Vérifiez d’abord le captcha.',
+            errSend: 'Impossible d’envoyer le lien. Réessayez.',
+            errVerify: 'Échec de la vérification. Vérifiez le lien ou le code.',
+            errDelete: 'Impossible de supprimer le compte. Réessayez.',
+          },
+        };
+
+        var state = {
+          step: 1,
+          email: '',
+          pendingCode: '',
+          token: '',
+          busy: false,
+          errorKey: '',
+        };
+
+        function t(key) {
+          var lang = document.documentElement.lang;
+          var dict = STR[lang] || STR.en;
+          return dict[key] || STR.en[key] || key;
+        }
+
+        function render() {
+          document.querySelectorAll('.wstep').forEach(function (el) {
+            var on = Number(el.getAttribute('data-step')) === state.step;
+            if (on) el.removeAttribute('hidden');
+            else el.setAttribute('hidden', '');
+          });
+          document.querySelectorAll('[data-i18n]').forEach(function (el) {
+            var key = el.getAttribute('data-i18n');
+            var text = t(key);
+            if (key === 'sentMsg' || key === 'confirmMsg') {
+              text = text.replace('{email}', state.email || '—');
+            }
+            el.textContent = text;
+          });
+          document.querySelectorAll('[data-i18n-placeholder]').forEach(function (el) {
+            el.placeholder = t(el.getAttribute('data-i18n-placeholder'));
+          });
+          document.querySelectorAll('[data-action]').forEach(function (el) {
+            var action = el.getAttribute('data-action');
+            el.disabled = state.busy;
+            if (action === 'send') el.textContent = state.busy ? t('sendingBtn') : t('sendBtn');
+            if (action === 'verify')
+              el.textContent = state.busy ? t('verifyingBtn') : t('verifyBtn');
+            if (action === 'delete')
+              el.textContent = state.busy ? t('deletingBtn') : t('deleteBtn');
+          });
+          var emailEl = document.getElementById('email');
+          if (emailEl && emailEl.value !== state.email && document.activeElement !== emailEl) {
+            emailEl.value = state.email;
+          }
+          document.querySelectorAll('[data-error]').forEach(function (el) {
+            if (state.errorKey) {
+              el.textContent = t(state.errorKey);
+              el.removeAttribute('hidden');
+            } else {
+              el.setAttribute('hidden', '');
+            }
+          });
+        }
+
+        var widgetId = null;
+        function renderTurnstile() {
+          var el = document.getElementById('tw');
+          if (!el || !window.turnstile) return;
+          el.innerHTML = '';
+          widgetId = window.turnstile.render(el, {
+            sitekey: TURNSTILE_SITEKEY,
+            theme: 'auto',
+            callback: function (token) {
+              state.token = token;
+            },
+            'expired-callback': function () {
+              state.token = '';
+            },
+            'error-callback': function () {
+              state.token = '';
+            },
+          });
+        }
+
+        function resetTurnstile() {
+          state.token = '';
+          if (widgetId !== null && window.turnstile) {
+            try {
+              window.turnstile.reset(widgetId);
+              return;
+            } catch (_) {
+              widgetId = null;
+            }
+          }
+          renderTurnstile();
+        }
+
+        function busy(on) {
+          state.busy = on;
+          render();
+        }
+
+        function fail(key) {
+          state.errorKey = key;
+          render();
+        }
+
+        async function send() {
+          state.errorKey = '';
+          var emailEl = document.getElementById('email');
+          state.email = (emailEl && emailEl.value ? emailEl.value : '').trim();
+          if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(state.email)) return fail('errEmail');
+          if (!state.token) return fail('errCaptcha');
+          busy(true);
+          var res = await api().auth.signInWithOtp({
+            email: state.email,
+            options: { captchaToken: state.token, emailRedirectTo: REDIRECT_TO },
+          });
+          busy(false);
+          if (res.error) return fail('errSend');
+          state.step = 2;
+          resetTurnstile();
+          render();
+        }
+
+        async function verifyCode() {
+          state.errorKey = '';
+          var codeEl = document.getElementById('code');
+          var token = codeEl ? codeEl.value.trim() : '';
+          if (token.length < 4) return fail('errVerify');
+          busy(true);
+          var res = await api().auth.verifyOtp({ email: state.email, token: token, type: 'email' });
+          busy(false);
+          if (res.error) return fail('errVerify');
+          state.step = 3;
+          render();
+        }
+
+        async function doDelete() {
+          state.errorKey = '';
+          busy(true);
+          try {
+            if (state.pendingCode) {
+              var ex = await api().auth.exchangeCodeForSession(state.pendingCode);
+              if (ex.error) {
+                busy(false);
+                return fail('errVerify');
+              }
+              state.pendingCode = '';
+              history.replaceState(null, '', REDIRECT_TO);
+            }
+            var res = await api().functions.invoke('delete-user', { method: 'POST' });
+            busy(false);
+            if (res.error) return fail('errDelete');
+            state.step = 4;
+            render();
+          } catch (_) {
+            busy(false);
+            fail('errDelete');
+          }
+        }
+
+        async function cancel() {
+          try {
+            await api().auth.signOut();
+          } catch (_) {
+            /* ignore */
+          }
+          state.step = 1;
+          state.email = '';
+          state.errorKey = '';
+          resetTurnstile();
+          render();
+        }
+
+        document.addEventListener('click', function (e) {
+          var btn = e.target.closest('[data-action]');
+          if (!btn || state.busy) return;
+          var action = btn.getAttribute('data-action');
+          if (action === 'send') send();
+          if (action === 'verify') verifyCode();
+          if (action === 'resend') send();
+          if (action === 'back') {
+            state.step = 1;
+            state.errorKey = '';
+            render();
+          }
+          if (action === 'delete') doDelete();
+          if (action === 'cancel') cancel();
+        });
+
+        var observer = new MutationObserver(render);
+        observer.observe(document.documentElement, { attributes: true, attributeFilter: ['lang'] });
+
+        var incoming = new URLSearchParams(location.search).get('code');
+        if (incoming) {
+          state.pendingCode = incoming;
+          state.step = 3;
+          history.replaceState(null, '', REDIRECT_TO);
+          api().auth.exchangeCodeForSession(incoming).then(function (res) {
+            if (res.error) return;
+            state.pendingCode = '';
+            var user = res.data && res.data.user;
+            if (user && user.email) {
+              state.email = user.email;
+              render();
+            }
+          });
+        }
+
+        var ts = document.createElement('script');
+        ts.src = 'https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit';
+        ts.async = true;
+        ts.onload = renderTurnstile;
+        document.head.appendChild(ts);
+
+        render();
+      })();
+    </script>
+  </body>
+</html>

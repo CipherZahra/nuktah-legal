@@ -262,6 +262,117 @@ a {
   color: var(--muted);
 }
 
+/* ─── Account-deletion wizard (delete.html) ─── */
+.wizard {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 22px 22px 26px;
+  margin-top: 28px;
+  box-shadow: var(--shadow);
+}
+
+.wstep[hidden] {
+  display: none;
+}
+
+.wlabel {
+  display: block;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--muted);
+  margin-bottom: 6px;
+}
+
+.winput {
+  width: 100%;
+  padding: 11px 14px;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  background: var(--bg);
+  color: var(--text);
+  font: inherit;
+  font-size: 15px;
+  margin-bottom: 12px;
+}
+
+.winput:focus {
+  outline: 2px solid color-mix(in srgb, var(--accent) 55%, transparent);
+  border-color: var(--accent);
+}
+
+.wbtn {
+  display: block;
+  width: 100%;
+  padding: 11px 16px;
+  border-radius: 10px;
+  border: 1px solid var(--border);
+  background: var(--card);
+  color: var(--text);
+  font: inherit;
+  font-weight: 700;
+  font-size: 14px;
+  cursor: pointer;
+  margin-top: 8px;
+}
+
+.wbtn:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+}
+
+.wbtn-primary {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: var(--on-accent);
+}
+
+.wbtn-danger {
+  background: #ef4444;
+  border-color: #ef4444;
+  color: #ffffff;
+}
+
+.wbtn-ghost {
+  background: transparent;
+}
+
+.werror {
+  color: #ef4444;
+  font-size: 13px;
+  margin: 8px 0 0;
+}
+
+.wsuccess {
+  color: var(--accent);
+  font-weight: 700;
+  font-size: 1rem;
+  margin: 0;
+}
+
+.wcode-row {
+  display: flex;
+  gap: 8px;
+}
+
+.wcode-row .winput {
+  flex: 1;
+  margin-bottom: 0;
+}
+
+.wcode-row .wbtn {
+  width: auto;
+  white-space: nowrap;
+  margin-top: 0;
+}
+
+.tw {
+  display: flex;
+  justify-content: center;
+  min-height: 65px;
+  margin: 4px 0 10px;
+}
+
 @media print {
   .site-header,
   .lang-switch {
